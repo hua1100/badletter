@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厭世信件轉換器</title>
+    <style>
+        body {
+            font-family: 'PingFang TC', 'Microsoft JhengHei UI', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            min-height: 120px;
+            font-size: 16px;
+        }
+        .email-thread {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .email-thread h3 {
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 10px 15px;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .thread-toggle {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .thread-container {
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .email-message {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #666;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .email-body {
+            font-size: 14px;
+        }
+        .add-thread {
+            width: 100%;
+            padding: 8px;
+            background: #f5f5f5;
+            border: 1px dashed #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #666;
+        }
+        .custom-fields {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .custom-field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .custom-field label {
+            width: 120px;
+            font-size: 14px;
+        }
+        .custom-field input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .option-button {
+            padding: 8px 15px;
+            background: #eee;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .option-button:hover {
+            background: #e0e0e0;
+        }
+        .option-selected {
+            background: #d32f2f;
+            color: white;
+        }
+        .convert-button {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: background 0.3s;
+        }
+        .convert-button:hover {
+            background: #b71c1c;
+        }
+        .result-container {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .mood-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .mood-slider {
+            flex-grow: 1;
+            margin: 0 15px;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .tab-active {
+            border-bottom: 2px solid #d32f2f;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>厭世信件轉換器 🔄</h1>
+        
+        <div class="tabs">
+            <div class="tab tab-active">郵件轉換</div>
+            <div class="tab">會議紀錄</div>
+            <div class="tab">請假申請</div>
+        </div>
+        
+        <div class="email-thread">
+            <h3>信件串 <button class="thread-toggle">顯示/隱藏</button></h3>
+            <div class="thread-container">
+            
+                <button class="add-thread">+ 添加更多信件</button>
+            </div>
+        </div>
+        
+        <p>將你的厭世想法輸入在下方，我們會轉換成職場適當的語言：</p>
+        
+        <textarea placeholder="例如：「這是什麼白癡要求，我已經連續加班一週了還要我今天完成？又來臨時需求？搞笑！」"></textarea>
+        
+    
+        
+        <div class="options">
+            <button class="option-button option-selected">專業正式</button>
+            <button class="option-button">委婉拒絕</button>
+            <button class="option-button">友善溝通</button>
+            <button class="option-button">堅定立場</button>
+            <button class="option-button">請求支援</button>
+        </div>
+        
+        <div class="mood-indicator">
+            <span>厭世程度：</span>
+            <input type="range" min="1" max="5" value="3" class="mood-slider">
+            <span>😑</span>
+        </div>
+        
+        <div class="custom-fields">
+            <h3>客製化資訊</h3>
+            <div class="custom-field">
+                <label>專案名稱：</label>
+                <input type="text" id="project-name" placeholder="如：年度行銷策略專案">
+            </div>
+            <div class="custom-field">
+                <label>截止日期：</label>
+                <input type="date" id="deadline">
+            </div>
+            <div class="custom-field">
+                <label>對方姓名：</label>
+                <input type="text" id="recipient-name" placeholder="如：王經理">
+            </div>
+            <div class="custom-field">
+                <label>我的職稱：</label>
+                <input type="text" id="my-title" placeholder="如：行銷專員">
+            </div>
+        </div>
+        
+        <button class="convert-button">轉換內容</button>
+        
+        <div class="result-container">
+            <h3>適合職場的回覆：</h3>
+            <p>感謝您的來信與任務安排。我理解這項工作的重要性，但需要說明的是，我本週已有多個緊急項目在處理中。為確保工作品質，建議我們可以討論一個更合理的時程安排，或者評估是否有資源可以協助。期待您的回覆，謝謝。</p>
+            
+            <div class="action-buttons">
+                <button class="copy-button">複製到剪貼簿</button>
+                <button class="regen-button">重新生成</button>
+                <button class="save-template">儲存為範本</button>
+            </div>
+            
+            <div id="saved-templates" class="saved-templates">
+                <h3>已儲存範本</h3>
+                <div class="templates-list">
+                    <!-- 這裡將顯示已儲存的範本 -->
+                    <div class="empty-message">尚無已儲存範本</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        © 2025 厭世信件轉換器 - 讓你在職場上保持體面，內心卻可以暗爽
+    </footer>
+    <script src="converter-logic.js"></script>
+</body>
+</html>
