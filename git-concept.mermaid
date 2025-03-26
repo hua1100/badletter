@@ -1,0 +1,18 @@
+flowchart LR
+    subgraph "本地電腦"
+        A["工作目錄<br>Working Directory"] -->|git add| B["暫存區<br>Staging Area"]
+        B -->|git commit| C["本地儲存庫<br>Local Repository"]
+    end
+    
+    subgraph "遠端伺服器"
+        D["GitHub 儲存庫<br>Remote Repository"]
+    end
+    
+    C -->|git push| D
+    D -->|git pull| C
+    D -->|git clone| A
+    
+    style A fill:#ffcccc
+    style B fill:#ccffcc
+    style C fill:#ccccff
+    style D fill:#ffccff
